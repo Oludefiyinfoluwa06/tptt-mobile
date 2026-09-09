@@ -5,6 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { getErrorMessage } from '@/api/client';
 import { Button } from '@/components/button';
+import { Card } from '@/components/card';
+import { IconCircle } from '@/components/icon-circle';
 import { TextField } from '@/components/text-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -41,19 +43,23 @@ export default function RegisterScreen() {
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
           <ScrollView contentContainerStyle={styles.scrollContent}>
             <ThemedView style={styles.header}>
-              <ThemedText type="title">Create account</ThemedText>
-              <ThemedText themeColor="textSecondary">
-                Sign up to start booking your next trip
-              </ThemedText>
+              <IconCircle sf="person.badge.plus" md="person_add" size={64} />
+              <ThemedView style={styles.headerText}>
+                <ThemedText type="title">Create account</ThemedText>
+                <ThemedText themeColor="textSecondary" style={styles.subtitle}>
+                  Sign up to start booking your next trip
+                </ThemedText>
+              </ThemedView>
             </ThemedView>
 
-            <ThemedView style={styles.form}>
+            <Card style={styles.card}>
               <TextField
                 label="Full name"
                 value={fullname}
                 onChangeText={setFullname}
                 autoComplete="name"
                 placeholder="Jane Doe"
+                icon={{ sf: 'person', md: 'person' }}
               />
               <TextField
                 label="Email"
@@ -62,6 +68,7 @@ export default function RegisterScreen() {
                 keyboardType="email-address"
                 autoComplete="email"
                 placeholder="you@example.com"
+                icon={{ sf: 'envelope', md: 'mail' }}
               />
               <TextField
                 label="Phone (optional)"
@@ -70,6 +77,7 @@ export default function RegisterScreen() {
                 keyboardType="phone-pad"
                 autoComplete="tel"
                 placeholder="+1 234 567 890"
+                icon={{ sf: 'phone', md: 'call' }}
               />
               <TextField
                 label="Password"
@@ -78,12 +86,15 @@ export default function RegisterScreen() {
                 secureTextEntry
                 autoComplete="password-new"
                 placeholder="At least 6 characters"
+                icon={{ sf: 'lock', md: 'lock' }}
               />
 
               {error ? (
-                <ThemedText style={styles.formError} themeColor="danger">
-                  {error}
-                </ThemedText>
+                <ThemedView type="dangerMuted" style={styles.errorBanner}>
+                  <ThemedText style={styles.errorText} themeColor="danger">
+                    {error}
+                  </ThemedText>
+                </ThemedView>
               ) : null}
 
               <Button
@@ -92,7 +103,7 @@ export default function RegisterScreen() {
                 loading={isSubmitting}
                 disabled={!fullname || !email || password.length < 6}
               />
-            </ThemedView>
+            </Card>
 
             <ThemedView style={styles.footer}>
               <ThemedText themeColor="textSecondary">Already have an account?</ThemedText>

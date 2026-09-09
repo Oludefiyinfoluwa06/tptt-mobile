@@ -5,7 +5,7 @@
 
 import '@/global.css';
 
-import { Platform } from 'react-native';
+import { Platform, type ViewStyle } from 'react-native';
 
 export const Colors = {
   light: {
@@ -14,10 +14,15 @@ export const Colors = {
     backgroundElement: '#F0F0F3',
     backgroundSelected: '#E0E1E6',
     textSecondary: '#60646C',
-    primary: '#3c87f7',
+    primary: '#2F6FED',
+    primaryMuted: '#E8EFFE',
     onPrimary: '#ffffff',
-    border: '#D8DAE0',
+    accent: '#FF7A59',
+    accentMuted: '#FFE9E2',
+    onAccent: '#ffffff',
+    border: '#E1E4EA',
     danger: '#E5484D',
+    dangerMuted: '#FDE8E8',
   },
   dark: {
     text: '#ffffff',
@@ -25,10 +30,15 @@ export const Colors = {
     backgroundElement: '#212225',
     backgroundSelected: '#2E3135',
     textSecondary: '#B0B4BA',
-    primary: '#3c87f7',
+    primary: '#5B90F5',
+    primaryMuted: '#1B2A4E',
     onPrimary: '#ffffff',
-    border: '#33353A',
+    accent: '#FF8F72',
+    accentMuted: '#3A2420',
+    onAccent: '#ffffff',
+    border: '#2E3136',
     danger: '#F87171',
+    dangerMuted: '#3A1E1F',
   },
 } as const;
 
@@ -68,6 +78,31 @@ export const Spacing = {
   five: 32,
   six: 64,
 } as const;
+
+export const Radius = {
+  sm: 8,
+  md: 12,
+  lg: 20,
+  xl: 28,
+  full: 999,
+} as const;
+
+/** Soft elevation for cards and other raised surfaces. */
+export const CardShadow: ViewStyle = Platform.select<ViewStyle>({
+  android: { elevation: 4 },
+  default: {
+    shadowColor: '#0F172A',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.08,
+    shadowRadius: 16,
+  },
+})!;
+
+/** Diagonal brand gradients, used sparingly for hero accents. */
+export const Gradients = {
+  primary: ['#4A8CFF', '#2F6FED'] as const,
+  sunset: ['#FF9966', '#FF6B6B'] as const,
+};
 
 export const BottomTabInset = Platform.select({ ios: 50, android: 80 }) ?? 0;
 export const MaxContentWidth = 800;

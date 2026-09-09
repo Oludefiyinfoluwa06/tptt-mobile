@@ -1,10 +1,12 @@
 import { Link } from 'expo-router';
 import { useState } from 'react';
-import { KeyboardAvoidingView, Platform } from 'react-native';
+import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { getErrorMessage } from '@/api/client';
 import { Button } from '@/components/button';
+import { Card } from '@/components/card';
+import { IconCircle } from '@/components/icon-circle';
 import { TextField } from '@/components/text-field';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -35,51 +37,62 @@ export default function LoginScreen() {
     <ThemedView style={{ flex: 1 }}>
       <SafeAreaView style={{ flex: 1 }}>
         <KeyboardAvoidingView
-          style={styles.container}
+          style={{ flex: 1 }}
           behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-          <ThemedView style={styles.header}>
-            <ThemedText type="title">Welcome back</ThemedText>
-            <ThemedText themeColor="textSecondary">Log in to continue your journey</ThemedText>
-          </ThemedView>
+          <ScrollView contentContainerStyle={styles.scrollContent}>
+            <ThemedView style={styles.header}>
+              <IconCircle sf="airplane" md="flight" size={64} />
+              <ThemedView style={styles.headerText}>
+                <ThemedText type="title">Welcome back</ThemedText>
+                <ThemedText themeColor="textSecondary" style={styles.subtitle}>
+                  Log in to continue your journey
+                </ThemedText>
+              </ThemedView>
+            </ThemedView>
 
-          <ThemedView style={styles.form}>
-            <TextField
-              label="Email"
-              value={email}
-              onChangeText={setEmail}
-              keyboardType="email-address"
-              autoComplete="email"
-              placeholder="you@example.com"
-            />
-            <TextField
-              label="Password"
-              value={password}
-              onChangeText={setPassword}
-              secureTextEntry
-              autoComplete="password"
-              placeholder="••••••••"
-            />
+            <Card style={styles.card}>
+              <TextField
+                label="Email"
+                value={email}
+                onChangeText={setEmail}
+                keyboardType="email-address"
+                autoComplete="email"
+                placeholder="you@example.com"
+                icon={{ sf: 'envelope', md: 'mail' }}
+              />
+              <TextField
+                label="Password"
+                value={password}
+                onChangeText={setPassword}
+                secureTextEntry
+                autoComplete="password"
+                placeholder="••••••••"
+                icon={{ sf: 'lock', md: 'lock' }}
+              />
 
-            {error ? (
-              <ThemedText style={styles.formError} themeColor="danger">
-                {error}
-              </ThemedText>
-            ) : null}
+              {error ? (
+                <ThemedView type="dangerMuted" style={styles.errorBanner}>
+                  <ThemedText style={styles.errorText} themeColor="danger">
+                    {error}
+                  </ThemedText>
+                </ThemedView>
+              ) : null}
 
-            <Button
-              label="Log in"
-              onPress={handleSubmit}
-              loading={isSubmitting}
-              disabled={!email || !password}
-            />
-          </ThemedView>
+              <Button
+                label="Log in"
+                onPress={handleSubmit}
+                loading={isSubmitting}
+                disabled={!email || !password}
+              />
+            </Card>
 
-          <ThemedView style={styles.footer}>
-            <ThemedText themeColor="textSecondary">Don&apos;t have an account?</ThemedText>
-            <Link href="/(auth)/register">
-              <ThemedText type="linkPrimary">Register</ThemedText>
-            </Link>
-          </ThemedView>
+            <ThemedView style={styles.footer}>
+              <ThemedText themeColor="textSecondary">Don&apos;t have an account?</ThemedText>
+              <Link href="/(auth)/register">
+                <ThemedText type="linkPrimary">Register</ThemedText>
+              </Link>
+            </ThemedView>
+          </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
     </ThemedView>

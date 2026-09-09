@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet } from 'react-native';
 
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 
 export const styles = StyleSheet.create({
   base: {
@@ -8,12 +8,22 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     gap: Spacing.two,
-    borderRadius: Spacing.two,
+    borderRadius: Radius.md,
     paddingVertical: Spacing.three,
     paddingHorizontal: Spacing.four,
   },
+  primaryShadow: Platform.select({
+    android: { elevation: 3 },
+    default: {
+      shadowColor: '#2F6FED',
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.25,
+      shadowRadius: 10,
+    },
+  })!,
   pressed: {
-    opacity: 0.8,
+    opacity: 0.85,
+    transform: [{ scale: 0.99 }],
   },
   disabled: {
     opacity: 0.5,
