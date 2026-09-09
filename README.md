@@ -1,56 +1,73 @@
-# Welcome to your Expo app 👋
+# TPTT Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Customer-facing mobile app for the **Travel & Tours Management** platform, built with Expo Router. Lets customers browse travel packages, submit booking requests, apply for visa assistance, upload documents, track application status, and receive notifications from the agency. Talks to the [tptt-api](../tptt-api) backend.
 
-## Get started
+## Tech Stack
+
+- Expo (React Native + Expo Router, file-based routing)
+- TypeScript
+- Axios + TanStack Query for API calls and server-state caching
+- `expo-secure-store` for persisting the auth token
+- Plain `StyleSheet` + small custom components (no UI library)
+
+## Project Structure
+
+```
+src/
+├── app/                    # Expo Router routes (kept thin — screens live in src/screens)
+│   ├── _layout.tsx          # Root layout: providers + auth-gated Stack
+│   ├── (auth)/                # Auth stack: login, register
+│   └── (tabs)/                  # Main tabs: Home, Packages, My Requests, Notifications, Profile
+├── screens/                 # Screen implementations + colocated *.styles.ts files
+├── components/                # Shared UI primitives (Button, TextField, ThemedText/View, ...)
+├── context/                     # React context providers (auth-context)
+├── providers/                     # App-wide providers (TanStack Query)
+├── api/                             # Axios client + per-resource API functions
+├── lib/                               # Small framework-agnostic helpers (secure token storage)
+└── constants/                           # Theme, spacing, env
+```
+
+Route files under `src/app/` are intentionally kept to a one-line re-export (`export { default } from '@/screens/...'`) — Expo Router treats every file inside `app/` as a route candidate, so screen logic and styles live in `src/screens/` instead to avoid polluting the route table.
+
+## Getting Started
 
 1. Install dependencies
-
    ```bash
    npm install
    ```
-
-2. Start the app
-
+2. Copy the environment template and point it at your backend
+   ```bash
+   cp .env.example .env
+   ```
+3. Start the dev server
    ```bash
    npx expo start
    ```
 
-In the output, you'll find options to open the app in a
+In the output, you'll find options to open the app in a development build, Android emulator, iOS simulator, or Expo Go.
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## Environment Variables
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+| Variable | Description |
+| --- | --- |
+| `EXPO_PUBLIC_API_URL` | Base URL of the `tptt-api` backend (e.g. `http://localhost:5000/api`) |
 
-## Get a fresh project
+## Navigation
 
-When you're ready, run:
+- **Auth Stack** (unauthenticated): Login, Register
+- **Main Tabs** (authenticated): Home, Packages, My Requests, Notifications, Profile
 
-```bash
-npm run reset-project
-```
+Auth state gates which stack is shown via `Stack.Protected` in the root layout; the JWT is persisted in `expo-secure-store` so a logged-in session survives app restarts.
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Branch Workflow
 
-### Other setup steps
+Each feature is built on its own `feature/<name>` branch, pushed for review/merge before the next one starts.
 
-- To set up ESLint for linting, run `npx expo lint`, or follow our guide on ["Using ESLint and Prettier"](https://docs.expo.dev/guides/using-eslint/)
-- If you'd like to set up unit testing, follow our guide on ["Unit Testing with Jest"](https://docs.expo.dev/develop/unit-testing/)
-- Learn more about the TypeScript setup in this template in our guide on ["Using TypeScript"](https://docs.expo.dev/guides/typescript/)
+## Roadmap
 
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+1. ✅ Auth (login/register/profile) + navigation shell
+2. Packages (Home + Packages list/detail)
+3. Bookings
+4. Visa Requests
+5. Documents (upload)
+6. Notifications
