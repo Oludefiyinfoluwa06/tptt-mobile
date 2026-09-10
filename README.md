@@ -59,6 +59,8 @@ In the output, you'll find options to open the app in a development build, Andro
 
 Auth state gates which stack is shown via `Stack.Protected` in the root layout; the JWT is persisted in `expo-secure-store` so a logged-in session survives app restarts.
 
+A tab that needs its own list/detail flow (e.g. Packages) nests a headerless `Stack` inside its route folder (`app/(tabs)/packages/_layout.tsx`) and renders its own `ScreenHeader` (back button + title) rather than the native Stack header — on web, `expo-router/unstable-native-tabs` draws a fixed floating pill over the top of the screen, which would otherwise sit on top of a native header.
+
 ## Branch Workflow
 
 Each feature is built on its own `feature/<name>` branch, pushed for review/merge before the next one starts.
@@ -66,7 +68,7 @@ Each feature is built on its own `feature/<name>` branch, pushed for review/merg
 ## Roadmap
 
 1. ✅ Auth (login/register/profile) + navigation shell
-2. Packages (Home + Packages list/detail)
+2. ✅ Packages (Home + Packages list/detail)
 3. Bookings
 4. Visa Requests
 5. Documents (upload)

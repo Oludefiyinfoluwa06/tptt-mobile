@@ -117,3 +117,6 @@ export const TabScreenInset = Platform.select<{ paddingTop?: number; paddingBott
   web: { paddingTop: 90 },
   default: { paddingBottom: BottomTabInset },
 })!;
+
+/** Top clearance for a custom in-screen header nested inside a tab (see `TabScreenInset`). */
+export const HeaderTopInset = Platform.select({ web: 90, default: Spacing.four })!;
