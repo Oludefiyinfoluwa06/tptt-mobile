@@ -8,7 +8,10 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: Spacing.four,
-    gap: Spacing.one,
+    gap: Spacing.three,
     ...TabScreenInset,
+  },
+  message: {
+    textAlign: 'center',
   },
 });

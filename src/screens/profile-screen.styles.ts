@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { Spacing, TabScreenInset } from '@/constants/theme';
+import { Radius, Spacing, TabScreenInset } from '@/constants/theme';
 
 export const styles = StyleSheet.create({
   container: {
@@ -11,14 +11,30 @@ export const styles = StyleSheet.create({
     ...TabScreenInset,
   },
   header: {
-    gap: Spacing.one,
+    alignItems: 'center',
+    gap: Spacing.two,
+  },
+  roleBadge: {
+    borderRadius: Radius.full,
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.half,
+  },
+  roleBadgeText: {
+    fontSize: 12,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
   },
   infoCard: {
-    borderRadius: Spacing.three,
-    padding: Spacing.three,
-    gap: Spacing.three,
+    gap: Spacing.four,
   },
   infoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.three,
+  },
+  infoRowText: {
+    flex: 1,
     gap: Spacing.half,
   },
   infoLabel: {

@@ -1,6 +1,6 @@
 import { StyleSheet } from 'react-native';
 
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
 
 export const styles = StyleSheet.create({
   scrollContent: {
@@ -11,12 +11,25 @@ export const styles = StyleSheet.create({
     gap: Spacing.five,
   },
   header: {
-    gap: Spacing.one,
-  },
-  form: {
+    alignItems: 'center',
     gap: Spacing.three,
   },
-  formError: {
+  headerText: {
+    alignItems: 'center',
+    gap: Spacing.one,
+  },
+  subtitle: {
+    textAlign: 'center',
+  },
+  card: {
+    gap: Spacing.three,
+  },
+  errorBanner: {
+    borderRadius: Radius.sm,
+    paddingHorizontal: Spacing.three,
+    paddingVertical: Spacing.two,
+  },
+  errorText: {
     fontSize: 14,
   },
   footer: {

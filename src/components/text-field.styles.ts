@@ -1,6 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { Platform, StyleSheet, type TextStyle } from 'react-native';
 
-import { Spacing } from '@/constants/theme';
+import { Radius, Spacing } from '@/constants/theme';
+
+// react-native-web supports CSS `outline-style`, but it's not in RN's TextStyle typings.
+export const webNoOutline =
+  Platform.OS === 'web' ? ({ outlineStyle: 'none' } as unknown as TextStyle) : undefined;
 
 export const styles = StyleSheet.create({
   container: {
@@ -10,10 +14,19 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
-  input: {
-    borderWidth: 1,
-    borderRadius: Spacing.two,
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderRadius: Radius.md,
     paddingHorizontal: Spacing.three,
+    gap: Spacing.two,
+  },
+  icon: {
+    opacity: 0.8,
+  },
+  input: {
+    flex: 1,
     paddingVertical: Spacing.two + Spacing.half,
     fontSize: 16,
   },
