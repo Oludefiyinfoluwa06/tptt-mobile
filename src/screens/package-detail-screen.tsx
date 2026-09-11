@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { Image } from 'expo-image';
-import { useLocalSearchParams } from 'expo-router';
-import { Alert, ScrollView, View } from 'react-native';
+import { useLocalSearchParams, useRouter } from 'expo-router';
+import { ScrollView, View } from 'react-native';
 
 import { getPackage, packageKeys } from '@/api/packages';
 import { AppIcon } from '@/components/app-icon';
@@ -17,6 +17,7 @@ import { styles } from './package-detail-screen.styles';
 
 export default function PackageDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
+  const router = useRouter();
   const theme = useTheme();
   const {
     data: pkg,
@@ -98,7 +99,7 @@ export default function PackageDetailScreen() {
           <Button
             label="Request Booking"
             onPress={() =>
-              Alert.alert('Coming soon', 'Booking requests will be available in a future update.')
+              router.push({ pathname: '/(tabs)/packages/book', params: { packageId: pkg._id } })
             }
           />
         </View>

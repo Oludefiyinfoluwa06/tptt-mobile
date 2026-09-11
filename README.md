@@ -59,7 +59,9 @@ In the output, you'll find options to open the app in a development build, Andro
 
 Auth state gates which stack is shown via `Stack.Protected` in the root layout; the JWT is persisted in `expo-secure-store` so a logged-in session survives app restarts.
 
-A tab that needs its own list/detail flow (e.g. Packages) nests a headerless `Stack` inside its route folder (`app/(tabs)/packages/_layout.tsx`) and renders its own `ScreenHeader` (back button + title) rather than the native Stack header — on web, `expo-router/unstable-native-tabs` draws a fixed floating pill over the top of the screen, which would otherwise sit on top of a native header.
+A tab that needs its own list/detail flow (e.g. Packages) nests a headerless `Stack` inside its route folder (`app/(tabs)/packages/_layout.tsx`) and renders its own `ScreenHeader` (back button + title) rather than the native Stack header — on web, `expo-router/unstable-native-tabs` draws a fixed floating pill over the top of the screen, which would otherwise sit on top of a native header. The same stack can hold a form screen too — `app/(tabs)/packages/book.tsx` (booking request) is reached via `router.push({ pathname, params })` rather than a deeper dynamic segment.
+
+My Requests shows the signed-in customer's booking requests (package, travel date, travelers, status) via `StatusBadge`, a small component that maps a status string to a color tone and already covers the statuses both Bookings and the upcoming Visa Requests feature use.
 
 ## Branch Workflow
 
@@ -69,7 +71,7 @@ Each feature is built on its own `feature/<name>` branch, pushed for review/merg
 
 1. ✅ Auth (login/register/profile) + navigation shell
 2. ✅ Packages (Home + Packages list/detail)
-3. Bookings
+3. ✅ Bookings
 4. Visa Requests
 5. Documents (upload)
 6. Notifications
