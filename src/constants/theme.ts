@@ -23,6 +23,10 @@ export const Colors = {
     border: '#E1E4EA',
     danger: '#E5484D',
     dangerMuted: '#FDE8E8',
+    warning: '#B45309',
+    warningMuted: '#FEF3C7',
+    success: '#15803D',
+    successMuted: '#DCFCE7',
   },
   dark: {
     text: '#ffffff',
@@ -39,6 +43,10 @@ export const Colors = {
     border: '#2E3136',
     danger: '#F87171',
     dangerMuted: '#3A1E1F',
+    warning: '#FBBF24',
+    warningMuted: '#3F2E0E',
+    success: '#4ADE80',
+    successMuted: '#132F1F',
   },
 } as const;
 
