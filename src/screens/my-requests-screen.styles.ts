@@ -7,22 +7,41 @@ export const styles = StyleSheet.create({
     flex: 1,
     ...TabScreenInset,
   },
-  header: {
+  scrollContent: {
     paddingHorizontal: Spacing.four,
-    paddingBottom: Spacing.three,
+    paddingBottom: Spacing.five,
+  },
+  header: {
+    paddingBottom: Spacing.four,
   },
   title: {
     fontSize: 28,
     fontWeight: '700',
   },
-  listContent: {
-    paddingHorizontal: Spacing.four,
-    paddingBottom: Spacing.five,
+  section: {
     gap: Spacing.three,
+    marginBottom: Spacing.five,
   },
-  card: {
+  sectionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  sectionTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  newButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: Spacing.half,
+  },
+  bookingCard: {
     flexDirection: 'row',
     gap: Spacing.three,
+  },
+  visaCard: {
+    gap: Spacing.one,
   },
   image: {
     width: 72,
@@ -41,6 +60,9 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: Spacing.one,
+  },
+  sectionEmptyText: {
+    fontSize: 14,
   },
   centered: {
     flex: 1,
