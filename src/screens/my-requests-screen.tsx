@@ -160,15 +160,19 @@ export default function MyRequestsScreen() {
               </ThemedText>
             ) : (
               visaRequests.map((item) => (
-                <Card key={item._id} style={styles.visaCard}>
-                  <ThemedText style={styles.cardTitle}>
-                    {item.visaType} visa · {item.country}
-                  </ThemedText>
-                  <ThemedText themeColor="textSecondary" numberOfLines={2}>
-                    {item.purpose}
-                  </ThemedText>
-                  <StatusBadge status={item.status} />
-                </Card>
+                <Pressable
+                  key={item._id}
+                  onPress={() => router.push(`/(tabs)/my-requests/visa/${item._id}`)}>
+                  <Card style={styles.visaCard}>
+                    <ThemedText style={styles.cardTitle}>
+                      {item.visaType} visa · {item.country}
+                    </ThemedText>
+                    <ThemedText themeColor="textSecondary" numberOfLines={2}>
+                      {item.purpose}
+                    </ThemedText>
+                    <StatusBadge status={item.status} />
+                  </Card>
+                </Pressable>
               ))
             )}
           </ThemedView>
