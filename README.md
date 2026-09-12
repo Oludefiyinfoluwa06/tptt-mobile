@@ -63,6 +63,8 @@ A tab that needs its own list/detail flow (e.g. Packages) nests a headerless `St
 
 My Requests shows the signed-in customer's booking requests and visa requests as two sections (package/travel date/travelers, or country/visa type/purpose) via `StatusBadge`, a small component that maps a status string to a color tone and covers the statuses both features use. Its "+ New" applies-for-a-visa entry point (`app/(tabs)/my-requests/apply-visa.tsx`) follows the same nested-stack-in-tab pattern as Packages, since a visa request isn't tied to a package and so doesn't fit under `packages/`. Tapping a visa request opens `app/(tabs)/my-requests/visa/[id].tsx`, which shows its status and lets the customer upload supporting documents (image or PDF, via `expo-document-picker`) and view previously uploaded ones.
 
+Notifications shows the agency's messages to the signed-in customer, newest first, with an unread indicator dot; tapping one marks it read. The Notifications tab icon also carries a live unread-count badge (`NativeTabs.Trigger.Badge` in `app/(tabs)/_layout.tsx`), fed by the same TanStack Query cache the Notifications screen uses, so reading a notification updates the badge immediately without a manual refetch.
+
 ## Branch Workflow
 
 Each feature is built on its own `feature/<name>` branch, pushed for review/merge before the next one starts.
@@ -74,4 +76,6 @@ Each feature is built on its own `feature/<name>` branch, pushed for review/merg
 3. ✅ Bookings
 4. ✅ Visa Requests
 5. ✅ Documents (upload)
-6. Notifications
+6. ✅ Notifications
+
+All planned features are now implemented. The Admin Web Dashboard (React, separate app) remains out of scope for this repo.
