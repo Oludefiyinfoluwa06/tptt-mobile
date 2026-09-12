@@ -5,6 +5,7 @@ export default function MyRequestsStackLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="apply-visa" />
+      <Stack.Screen name="visa/[id]" />
     </Stack>
   );
 }
