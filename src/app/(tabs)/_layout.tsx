@@ -1,11 +1,19 @@
+import { useQuery } from '@tanstack/react-query';
 import { NativeTabs } from 'expo-router/unstable-native-tabs';
 import { useColorScheme } from 'react-native';
 
+import { getNotifications, notificationKeys } from '@/api/notifications';
 import { Colors } from '@/constants/theme';
 
 export default function TabsLayout() {
   const scheme = useColorScheme();
   const colors = Colors[scheme === 'unspecified' ? 'light' : (scheme ?? 'light')];
+
+  const { data: notifications } = useQuery({
+    queryKey: notificationKeys.mine,
+    queryFn: getNotifications,
+  });
+  const unreadCount = notifications?.filter((n) => !n.isRead).length ?? 0;
 
   return (
     <NativeTabs
@@ -37,6 +45,9 @@ export default function TabsLayout() {
       <NativeTabs.Trigger name="notifications">
         <NativeTabs.Trigger.Label>Notifications</NativeTabs.Trigger.Label>
         <NativeTabs.Trigger.Icon sf={{ default: 'bell', selected: 'bell.fill' }} md="notifications" />
+        <NativeTabs.Trigger.Badge hidden={unreadCount === 0}>
+          {String(unreadCount)}
+        </NativeTabs.Trigger.Badge>
       </NativeTabs.Trigger>
 
       <NativeTabs.Trigger name="profile">
