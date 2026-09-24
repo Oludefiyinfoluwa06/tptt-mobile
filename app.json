@@ -41,6 +41,13 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "4807c703-a872-412b-b6d7-6a49b00b465c"
+      }
+    },
+    "owner": "oftotech"
   }
 }
