@@ -41,8 +41,10 @@ export async function uploadDocument(payload: UploadDocumentPayload): Promise<Do
     );
   }
 
-  const { data } = await apiClient.post<{ document: Document }>('/documents/upload', formData, {
-    headers: { 'Content-Type': 'multipart/form-data' },
-  });
+  // Don't set Content-Type manually: axios/the platform needs to generate it
+  // itself so it includes the multipart boundary. A hardcoded
+  // 'multipart/form-data' header (no boundary) corrupts the request body,
+  // which is why uploaded files came back with no extension and wouldn't open.
+  const { data } = await apiClient.post<{ document: Document }>('/documents/upload', formData);
   return data.document;
 }
